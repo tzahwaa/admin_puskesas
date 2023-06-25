@@ -109,13 +109,13 @@ public function getPosyanduByPuskesmas(Request $request)
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexApi()
+    public function indexApi($id_puskesmas)
     {
         //
-        $posyandu = Posyandu::paginate(5);
+        $posyandu = Posyandu::where('puskesmas_id', $id_puskesmas)->paginate(5);
           return response()->json([
           'status' => 'success',
-        'message' => 'Data posyandu berhasil ditemukan.',
+        'message' => 'Data posyandu berdasarkan puskesmas berhasil ditemukan.',
         'data' => $posyandu->items(),
         'current_page' => $posyandu->currentPage(),
         'total' => $posyandu->total(),

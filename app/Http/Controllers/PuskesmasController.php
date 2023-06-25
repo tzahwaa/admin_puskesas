@@ -8,7 +8,80 @@ use Illuminate\Support\Facades\Session;
 
 class PuskesmasController extends Controller
 {
-    public function index(Request $request)
+    // api
+     public function all()
+    {
+        //semua data
+        $all = Puskesmas::with('posyandu.balita')->paginate(5);
+        // return response()->json(['data' => $all]);
+      
+        if($all->isEmpty()){
+            return response()->json([
+            'status' => 'error',
+            "message" => 'data tidak ditemukan',
+            ],404);
+        }
+            return response()->json([
+            'status' => 'success',
+            'message' => 'seluruh data berhasil ditemukan',
+            'data' => $all->items(),
+            'current_page' => $all->currentPage(),
+            'total' => $all->total(),
+            'per_page' => $all->perPage(),
+            'last_page' => $all->lastPage(),
+            'next_page_url' => $all->nextPageUrl(),
+            'prev_page_url' => $all->previousPageUrl()
+        ]);
+    }
+   
+    public function storeApi(Request $request)
+    {
+        $validatedData = $request->validate([
+            'nama_puskesmas' => 'required',
+            'alamat' => 'required',
+            'telepon' => 'required',
+            'sms_wa' => 'required',
+        ]);
+
+        $puskesmas = Puskesmas::create([
+            'nama_puskesmas' => $validatedData['nama_puskesmas'],
+            'alamat' => $validatedData['alamat'],
+            'telepon' => $validatedData['telepon'],
+            'sms_wa' => $validatedData['sms_wa'],
+        ]);
+
+        return response()->json([
+            'message' => 'Puskesmas created successfully',
+            'data' => $puskesmas
+        ], 201);
+    }
+     public function indexApi()
+    {
+        //
+        $puskesmas = Puskesmas::paginate(5);
+            return response()->json([
+        'status' => 'success',
+        'message' => 'data puskesmas berhasil ditemukan',
+        'data' => $puskesmas->items(),
+        'current_page' => $puskesmas->currentPage(),
+        'total' => $puskesmas->total(),
+        'per_page' => $puskesmas->perPage(),
+        'last_page' => $puskesmas->lastPage(),
+        'next_page_url' => $puskesmas->nextPageUrl(),
+        'prev_page_url' => $puskesmas->previousPageUrl()
+        ]);
+    }
+    public function showApi($id)
+    {
+        //
+        $puskesmas = Puskesmas::findOrFail($id);
+        return response()->json($puskesmas);
+    
+    
+    }
+
+    // end api
+     public function index(Request $request)
 {
     $keyword = $request->keyword;
     $datapuskesmas = Puskesmas::where('nama_puskesmas', 'LIKE', '%'.$keyword.'%')
@@ -25,7 +98,6 @@ class PuskesmasController extends Controller
         $value = new Puskesmas;
         return view('datapuskesmas.create', compact('value'));
     }
-
     public function store(Request $request)
     {
         $request->validate([
@@ -86,22 +158,7 @@ class PuskesmasController extends Controller
         return redirect('datapuskesmas')->with('success', 'Data berhasil dihapus!');
     }
  
-    public function indexApi()
-    {
-        //
-        $puskesmas = Puskesmas::paginate(5);
-            return response()->json([
-        'status' => 'success',
-        'message' => 'data puskesmas berhasil ditemukan',
-        'data' => $puskesmas->items(),
-        'current_page' => $puskesmas->currentPage(),
-        'total' => $puskesmas->total(),
-        'per_page' => $puskesmas->perPage(),
-        'last_page' => $puskesmas->lastPage(),
-        'next_page_url' => $puskesmas->nextPageUrl(),
-        'prev_page_url' => $puskesmas->previousPageUrl()
-        ]);
-    }
+   
 
     /**
      * Store a newly created resource in storage.
@@ -115,14 +172,7 @@ class PuskesmasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showApi($id)
-    {
-        //
-        $puskesmas = Puskesmas::findOrFail($id);
-        return response()->json($puskesmas);
     
-    
-    }
 
     /**
      * Update the specified resource in storage.
