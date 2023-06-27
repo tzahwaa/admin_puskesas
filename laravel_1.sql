@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 27, 2023 at 09:00 AM
+-- Generation Time: Jun 27, 2023 at 09:04 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -344,7 +344,6 @@ CREATE TABLE `users` (
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
   `role` varchar(255) DEFAULT 'user',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -354,15 +353,15 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `image`, `role`, `created_at`, `updated_at`) VALUES
-(1, 'wahyu pas', 'wahyuadhiprabo@gmail.com', '$2y$10$rUbIBvxfX0l.hRSscQDGbO22CHpH7pV5B.YkXpFwvAH4efSrcfwSC', NULL, 'user', '2023-06-23 03:16:30', '2023-06-23 03:16:30'),
-(2, 'wahyu', 'wahyuadhiprabow100@gmail.com', '$2y$10$rQV4Ix4mGJtk7vMhwaJuSO0T7Ki.P09l.b27VV7IZRK/8/Y0s8eJK', NULL, 'user', '2023-06-23 03:27:22', '2023-06-23 03:27:22'),
-(3, 'wahyu', 'wahyuadhiprabo1@gmail.com', '$2y$10$piuatjdYWSSWrW9JHTnLC.2DKHcsqwkkJwyD5vNlzL81BtEjhX.Sa', NULL, 'user', '2023-06-23 03:30:08', '2023-06-23 03:30:08'),
-(4, 'wahyu', 'wahyuadhiprab@gmail.com', '$2y$10$pgCWTf75UIJtgy/WXaivMuw29avDD.jwYDg9gBR1eszh8x0n.H1NW', NULL, 'admin', '2023-06-23 03:37:11', '2023-06-23 03:37:11'),
-(5, 'wahyu adhi prabowo', 'wahyu@gmail.com', '$2y$10$CW7wux4EN3fVqvFxxHsMZ.urRiXS2T46UlBzuNWae3UFnhx3vh0u6', NULL, 'user', '2023-06-23 04:07:21', '2023-06-23 04:07:21'),
-(6, 'lol', 'bowo@gmail.com', '$2y$10$fN.kNJutxjpVuNKEly1M5.3EaIX7v9qwG.0bh.9Dso1Z5PkBk0zkm', 'default.png', 'user', '2023-06-23 05:00:31', '2023-06-23 05:54:42'),
-(7, 'wahyuu adhi', 'wahyuadhiprabowoo1@gmail.com', '$2y$10$UJSGEmoLyq1muzCsss5veeUZUMGt.IpLZKEdwJQMa9N1BbM8Aykwi', 'default.png', 'user', '2023-06-25 00:47:00', '2023-06-25 00:47:00'),
-(8, 'Tasya zahwa', 'tzhw12@gmail.com', '1234567', 'image.png', 'admin', NULL, NULL);
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `created_at`, `updated_at`) VALUES
+(1, 'wahyu pas', 'wahyuadhiprabo@gmail.com', '$2y$10$rUbIBvxfX0l.hRSscQDGbO22CHpH7pV5B.YkXpFwvAH4efSrcfwSC', 'user', '2023-06-23 03:16:30', '2023-06-23 03:16:30'),
+(2, 'wahyu', 'wahyuadhiprabow100@gmail.com', '$2y$10$rQV4Ix4mGJtk7vMhwaJuSO0T7Ki.P09l.b27VV7IZRK/8/Y0s8eJK', 'user', '2023-06-23 03:27:22', '2023-06-23 03:27:22'),
+(3, 'wahyu', 'wahyuadhiprabo1@gmail.com', '$2y$10$piuatjdYWSSWrW9JHTnLC.2DKHcsqwkkJwyD5vNlzL81BtEjhX.Sa', 'user', '2023-06-23 03:30:08', '2023-06-23 03:30:08'),
+(4, 'wahyu', 'wahyuadhiprab@gmail.com', '$2y$10$pgCWTf75UIJtgy/WXaivMuw29avDD.jwYDg9gBR1eszh8x0n.H1NW', 'admin', '2023-06-23 03:37:11', '2023-06-23 03:37:11'),
+(5, 'wahyu adhi prabowo', 'wahyu@gmail.com', '$2y$10$CW7wux4EN3fVqvFxxHsMZ.urRiXS2T46UlBzuNWae3UFnhx3vh0u6', 'user', '2023-06-23 04:07:21', '2023-06-23 04:07:21'),
+(6, 'lol', 'bowo@gmail.com', '$2y$10$fN.kNJutxjpVuNKEly1M5.3EaIX7v9qwG.0bh.9Dso1Z5PkBk0zkm', 'user', '2023-06-23 05:00:31', '2023-06-23 05:54:42'),
+(7, 'wahyuu adhi', 'wahyuadhiprabowoo1@gmail.com', '$2y$10$UJSGEmoLyq1muzCsss5veeUZUMGt.IpLZKEdwJQMa9N1BbM8Aykwi', 'user', '2023-06-25 00:47:00', '2023-06-25 00:47:00'),
+(8, 'Tasya zahwa', 'tzhw12@gmail.com', '1234567', 'admin', NULL, NULL);
 
 --
 -- Indexes for dumped tables

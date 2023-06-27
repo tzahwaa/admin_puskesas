@@ -21,7 +21,7 @@ use App\Http\Controllers\AdminController;
 */
 
 Route::get('/', function () {
-    return view('dashboard.index');
+    return view('dashboard');
 });
 
 // Confirm Email
