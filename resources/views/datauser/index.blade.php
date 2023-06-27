@@ -1,6 +1,6 @@
 @extends('datauser.main')
 
-@section('title', 'DataUser   ')
+@section('title', 'DataUser')
 
 @section('container')
 
@@ -14,14 +14,14 @@
                 <div class="flex flex-col sm:flex-row sm:items-end xl:items-start">
                     <form id="tabulator-html-filter-form" class="xl:flex sm:mr-auto" >
                         <div class="sm:flex items-center sm:mr-4 mt-2 xl:mt-0">
-                    @if(session('search_message'))
-                        <div class="confirmation-box">
-                            <div class="confirmation-content">
-                                <p>{{ session('search_message') }}</p>
-                                <button class="btn btn-primary w-24 confirm-button" onclick="closeConfirmationBox()">OK</button>
-                            </div>
-                        </div>
-                    @endif
+                            @if(session('search_message'))
+                                <div class="confirmation-box">
+                                    <div class="confirmation-content">
+                                        <p>{{ session('search_message') }}</p>
+                                        <button class="btn btn-primary w-24 confirm-button" onclick="closeConfirmationBox()">OK</button>
+                                    </div>
+                                </div>
+                            @endif
 
                     <!-- Add your CSS styles -->
                     <style>
@@ -55,31 +55,22 @@
                     }
                     </script>
                         <form method="GET" action="{{ url('datauser') }}">
-                            <input id="tabulator-html-filter-value" type="text" class="form-control sm:w-56 2xl:w-full mt-2 sm:mt-0" name="keyword" placeholder="Cari user ...">
+                            <input id="tabulator-html-filter-value" type="text" class="form-control sm:w-56 2xl:w-full mt-2 sm:mt-0" name="keyword" placeholder="Cari username ...">
                             <button class="btn btn-dark w-24 ml-4 mb-2 mt-2">Search</button>
                             </div>
                     </form>
-                    <div class="flex mt-5 sm:mt-0">
-                    @if(session('success'))
-                        <div class="confirmation-box">
-                            <div class="confirmation-content">
-                                <p>{{ session('success') }}</p>
-                                <button class="btn btn-primary w-24 confirm-button" onclick="closeConfirmationBox()">OK</button>
-                            </div>
-                        </div>
-                    @endif    
                 </div>
                 <div class="overflow-x-auto mt-8">
                 <table class="table table-bordered">
          <thead class="table-dark text-center">
                 <tr>
                     <th>No</th>
-                    <th>Nama User</th>
+                    <th>Nama</th>
                     <th>Email</th>
-                    <th>Password</th>
+
                 </tr>
          </thead>
-         @foreach($datauser as $keys=>$value)
+         @foreach($data as $keys=>$value)
          @php
             $pageNumber = ($datauser->currentPage() - 1) * $datauser->perPage() + $keys + 1;
             @endphp
@@ -87,13 +78,11 @@
                 <td>{{ $pageNumber }}</td>
                 <td>{{ $value->name }}</td>
                 <td>{{ $value->email}}</td>
-                <td>{{ $value->password }}</td>
             </tr>
          @endforeach
+    </tbody>
      </table>
-     </form>
 </div>
      <br>
         {{ $datauser->links() }}
-
 @endsection

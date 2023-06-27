@@ -62,13 +62,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('databalita') }}" class="top-menu">
+                    <a href="{{ route('dataadmin') }}" class="top-menu">
                         <div class="top-menu__icon"> <i data-lucide="database"></i> </div>
                         <div class="top-menu__title"> Data Admin <i class="top-menu__sub-icon"></i> </div>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('databalita') }}" class="top-menu">
+                    <a href="{{ route('datauser') }}" class="top-menu">
                         <div class="top-menu__icon"> <i data-lucide="user"></i> </div>
                         <div class="top-menu__title"> Data User <i class="top-menu__sub-icon"></i> </div>
                     </a>
@@ -92,6 +92,8 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
         <!-- BEGIN: JS Assets-->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{url('filter.js')}}"></script>
         <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=["your-google-map-api"]&libraries=places"></script>
         <script src="{{ asset('assets/dist/js/app.js') }}"></script>

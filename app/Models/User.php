@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'image'
+        'name', 'email', 'password', 'image', 'role',
     ];
 
     /**
@@ -27,7 +27,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
     ];
 
     /**
@@ -51,4 +51,5 @@ class User extends Authenticatable
         // Jika tidak ada gambar, kembalikan URL gambar default
         return asset('images/default.jpg');
     }
+    
 }

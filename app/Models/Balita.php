@@ -22,6 +22,8 @@ class Balita extends Model
         'klasifikasi_berat_badan',
         'klasifikasi_panjang_badan',
         'klasifikasi_detak_jantung',
+        'sistolik',
+        'diastolik',
         'posyandu_id',
         'puskesmas_id',
     ];

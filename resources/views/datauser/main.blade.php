@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
         <meta charset="utf-8">
         <link href="{{ asset('assets/dist/images/logo.svg') }}" rel="shortcut icon">
@@ -62,7 +61,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('databalita') }}" class="top-menu">
+                    <a href="{{ route('dataadmin') }}" class="top-menu">
                         <div class="top-menu__icon"> <i data-lucide="database"></i> </div>
                         <div class="top-menu__title"> Data Admin <i class="top-menu__sub-icon"></i> </div>
                     </a>
@@ -90,11 +89,15 @@
 
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+        <script>
 
+            
+        </script>
         <!-- BEGIN: JS Assets-->
         <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=["your-google-map-api"]&libraries=places"></script>
         <script src="{{ asset('assets/dist/js/app.js') }}"></script>
         <!-- END: JS Assets-->
+        
 </body>
 </html>

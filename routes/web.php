@@ -7,6 +7,7 @@ use App\Http\Controllers\DataBalitaController;
 use App\Http\Controllers\PuskesmasController;
 use App\Http\Controllers\PosyanduController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,11 +75,18 @@ Route::get('/posyandu/search', [PosyanduController::class,'search'])->name('posy
 
 Route::get('/posyandu/getPosyanduByPuskesmas', [PosyanduController::class, 'getPosyanduByPuskesmas'])->name('posyandu.getPosyanduByPuskesmasOnly');
 
+Route::get('/datauser', [UserController::class,'index'])->name('datauser');
 
+Route::get('/datauser/search', [UserController::class,'search'])->name('datauser.search');
 
+Route::get('/dataadmin', [AdminController::class,'index'])->name('dataadmin');
 
-Route::get('/rekap/{id}',[RekapAbsensiController::class, 'rekap']);
+Route::get('/admin/create', [AdminController::class,'create'])->name('admin.create');
 
-Route::get('/search', [RekapAbsensiController::class, 'search'])->name('search');
+Route::post('/admin/store', [AdminController::class,'store'])->name('admin.store');
 
-Route::get('/rekap/rekap_pdf/','App\Http\Controllers\RekapAbsensiController@pdf')->name('rekap.rekap_pdf');  
+Route::get('/admin/edit/{id}', [AdminController::class,'edit'])->name('admin.edit');
+
+Route::post('/admin/update/{id}', [AdminController::class,'update'])->name('admin.update');
+
+Route::post('/admin/delete/{id}', [AdminController::class,'destroy'])->name('admin.destroy');

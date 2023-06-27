@@ -16,25 +16,13 @@ class AuthApiController extends Controller
         'name' => 'required|string',
         'email' => 'required|string|email|unique:users',
         'password' => 'required|string|confirmed|min:8|',
-        'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 
     ]);
-    $nama_gambar = null;
-
-    if ($request->hasFile('image')) {
-        $gambar = $request->file('image');
-        $nama_gambar = time().'.'.$gambar->extension();
-        $gambar->move(public_path('images'), $nama_gambar);
-    } else {
-        // Set gambar default jika tidak ada gambar yang diunggah
-        $nama_gambar = 'default.png';
-    }
-    // $validateData["password"] = Hash::make($request->password);
+    
     $user = User::create([
         'name' => $validateData['name'],
         'email' => $validateData['email'],
         'password' => bcrypt($validateData['password']),
-        'image' => $nama_gambar,
     ]);
 
        $token = $user->createToken('API Token')->accessToken;
@@ -80,14 +68,13 @@ class AuthApiController extends Controller
     $userId = $user->id;
     $name = $user->name;
     $email = $user->email; 
-    $imageUrl = url('images/' . $user->image);
     $role = $user->role; 
     $password = $user->password; 
 
     // Lakukan operasi lain dengan informasi pengguna
 
     // Mengembalikan respons
-    return response()->json(['user_id' => $userId, 'name' => $name, 'email' => $email,'image' => $imageUrl, 'role' => $role, 'password' => $password]);
+    return response()->json(['user_id' => $userId, 'name' => $name, 'email' => $email, 'role' => $role, 'password' => $password]);
 }
 
 // update 
@@ -99,24 +86,12 @@ class AuthApiController extends Controller
             'name' => 'sometimes|required',
             'email' => 'sometimes|required|email|unique:users,email,' . $user->id,
             'password' => 'sometimes|required|min:6',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-
             'role' => 'nullable|in:user,admin'
         ]);
 
         if (isset($data['password'])) {
             $data['password'] = Hash::make($data['password']);
         }
-
-        if ($request->hasFile('image')) {
-            // Jika ada gambar yang diberikan, simpan gambar yang diberikan
-            $imagePath = $request->file('image')->store('public/images');
-            $data['image'] = $imagePath;
-        } else {
-            // Jika tidak ada gambar yang diberikan, set gambar default
-            $data['image'] = 'default.png';
-        }
-
         $user->update($data);
 
         return response()->json(['message' => 'User updated successfully' ,'user'=> $user]);

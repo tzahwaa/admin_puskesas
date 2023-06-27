@@ -11,9 +11,9 @@ $("#puskesmasDropdown").change(function () {
                     $("#posyanduDropdown").append(
                         "<option>Pilih Posyandu</option>"
                     );
-                    $.each(res, function (id, nama) {
+                    $.each(res, function (id, nama_posyandu) {
                         $("#posyanduDropdown").append(
-                            '<option value="' + nama + '">' + id + "</option>"
+                            '<option value="' + nama_posyandu + '">' + id + "</option>"
                         );
                         console.log(res);
                     });

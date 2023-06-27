@@ -62,13 +62,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('dataposyandu') }}" class="top-menu">
+                    <a href="{{ route('dataadmin') }}" class="top-menu">
                         <div class="top-menu__icon"> <i data-lucide="database"></i> </div>
                         <div class="top-menu__title"> Data Admin <i class="top-menu__sub-icon"></i> </div>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('dataposyandu') }}" class="top-menu">
+                    <a href="{{ route('datauser') }}" class="top-menu">
                         <div class="top-menu__icon"> <i data-lucide="user"></i> </div>
                         <div class="top-menu__title"> Data User <i class="top-menu__sub-icon"></i> </div>
                     </a>

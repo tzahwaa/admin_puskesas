@@ -9,10 +9,15 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
+        $data = User::where('role', 'user')->get();
+        // dd($datauser);
         $keyword = $request->keyword;
         $datauser = User::where('name', 'LIKE', '%'.$keyword.'%')
             ->paginate(10);
-        $datauser->appends($request->all());
-        return view('datauser.index', compact('datauser','keyword'));
+        if ($datauser->isEmpty()) {
+            $message = "Data user tidak ditemukan.";
+            return redirect('datauser')->with('search_message', $message);
+        }
+        return view('datauser.index', compact('datauser','keyword', 'data'));
     }
 }

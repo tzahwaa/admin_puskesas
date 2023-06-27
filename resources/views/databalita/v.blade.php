@@ -116,7 +116,10 @@
          </thead>
          <tbody id="balitaTableBody">
          @foreach($databalita as $keys=>$value)
-            <tr>
+         @php
+            $pageNumber = ($databalita->currentPage() - 1) * $databalita->perPage() + $keys + 1;
+            @endphp
+            <tr class="table-dark text-center">
                 <td>{{ $value->id }}</td>
                 <td>{{ $value->nama_anak }}</td>
                 <td>{{ $value->nama_ibu}}</td>
