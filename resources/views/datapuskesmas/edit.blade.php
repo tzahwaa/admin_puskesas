@@ -15,7 +15,7 @@
         @csrf
             <div class="form-group">
                 <label>Nama Puskesmas</label>
-                <input type="text" name="nama_puskesmas" value="{{ $value->nama_puskesmas }}" class="form-control" disabled>
+                <input type="text" name="nama_puskesmas" value="{{ $value->nama_puskesmas }}" class="form-control">
                 @error('nama_puskesmas')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror

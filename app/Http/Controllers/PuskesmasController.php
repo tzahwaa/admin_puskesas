@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Puskesmas;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 
 class PuskesmasController extends Controller
@@ -133,17 +134,24 @@ class PuskesmasController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'nama_puskesmas' => [
+                'required',
+                Rule::unique('puskesmas')->ignore($id),
+            ],
             'alamat' => 'required',
             'telepon' => 'required|numeric',
             'sms_wa' => 'required|numeric',
         ], [
+            'nama_puskesmas.required' => 'Nama Puskesmas Tidak Boleh Kosong',
             'alamat.required' => 'Alamat Tidak Boleh Kosong',
             'telepon.required' => 'Nomor Telepon Tidak Boleh Kosong',
             'sms_wa.required' => 'Nomor WA Tidak Boleh Kosong',
             'telepon.numeric' => 'Nomor Telepon Harus Berupa Angka',
-            'sms_wa.numeric' => 'Nomor WA Harus Berupa Angka'
+            'sms_wa.numeric' => 'Nomor WA Harus Berupa Angka',
+            'nama_puskesmas.unique' => 'Puskesmas Tersebut Sudah Terdaftar'
         ]);
         $value = Puskesmas::find($id);
+        $value->nama_puskesmas = $request->nama_puskesmas;
         $value->alamat = $request->alamat;
         $value->telepon = $request->telepon;
         $value->sms_wa = $request->sms_wa;

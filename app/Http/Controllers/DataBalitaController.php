@@ -24,6 +24,8 @@ class DataBalitaController extends Controller
 }
      public function getPosyandu(Request $request){
         $posyanduList = Posyandu::where("puskesmas_id", $request->id_puskesmas)->pluck('id','nama_posyandu');
+
+        // dd($posyanduList);
         return response()->json($posyanduList);
 
     }

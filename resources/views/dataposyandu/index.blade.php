@@ -69,7 +69,6 @@
                         </div>
                     @endif
                     <div class="form-group">
-                <label for="puskesmas">Pilih Puskesmas:</label>
                 <select name="puskesmas_id" id="puskesmasDropdown">
                         <option value="">Pilih Puskesmas</option>
                         @foreach($puskesmasList as $puskesmas)
@@ -121,10 +120,12 @@
                     <th>Alamat</th>
                     <th>Kelurahan</th>
                     <th>Kecamatan</th>
+                    <th>Puskesmas</th>
                     <th>Edit</th>
                     <th>Hapus</th>
                 </tr>
          </thead>
+         <tbody id="posyanduTableBody">
          @foreach($dataposyandu as $keys=>$value)
          @php
             $pageNumber = ($dataposyandu->currentPage() - 1) * $dataposyandu->perPage() + $keys + 1;
@@ -135,6 +136,7 @@
                 <td>{{ $value->alamat}}</td>
                 <td>{{ $value->kelurahan }}</td>
                 <td>{{ $value->kecamatan }}</td>
+                <td>{{ $value->puskesmas->nama_puskesmas }}</td>
                 <td><a href="{{ route('posyandu.edit', $value->id) }}" class="btn btn-warning btn-sm">Edit</a></td>
                     <td>
                         <form action="{{ route('posyandu.destroy', $value->id) }}" method="POST">
@@ -160,18 +162,44 @@ $(document).ready(function() {
                 posyanduTableBody.empty();
 
                 $.each(response, function(index, posyandu) {
-                    var newRow = '<tr>' +
+                    var newRow = '<tr class="table-dark text-center">' +
+                        '<td>' + (index + 1) + '</td>' +
                         '<td>' + posyandu.nama_posyandu + '</td>' +
                         '<td>' + posyandu.alamat + '</td>' +
                         '<td>' + posyandu.kelurahan + '</td>' +
                         '<td>' + posyandu.kecamatan + '</td>' +
+                        '<td>' + posyandu.puskesmas.nama_puskesmas + '</td>' +
+                        '<td>' +  '<a href="/posyandu/edit/' + posyandu.id + '" class="btn btn-warning btn-sm">Edit</a>' + '</td>' +
+                        '<td>' + '<button onclick="deletePosyandu(' + posyandu.id + ')" class="btn btn-danger btn-sm">Hapus</button>' +'</td>' +
                         '</tr>';
                     posyanduTableBody.append(newRow);
                 });
             }
         });
     });
+    
 });
+    function deletePosyandu(id) {
+        if (confirm('Anda yakin ingin menghapus data ini?')) {
+            $.ajax({
+                url: '/posyandu/delete/' + id,
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    _method: 'DELETE'
+                },
+                success: function(response) {
+                    // Tambahkan tindakan setelah data berhasil dihapus, seperti memuat ulang halaman atau mengupdate tampilan
+                    console.log('Data berhasil dihapus');
+                    window.location = '{{ route('dataposyandu') }}';
+                },
+                error: function(xhr, status, error) {
+                    // Tambahkan tindakan jika terjadi kesalahan saat menghapus data
+                    console.error('Terjadi kesalahan saat menghapus data:', error);
+                }
+            });
+        }
+    }
 </script>
 
      </form>

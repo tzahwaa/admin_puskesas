@@ -29,7 +29,7 @@
                     </ol>
                 </nav>
                 <div class="intro-x relative mr-3 sm:mr-6">
-                <button class="btn btn-dark w-24 mr-1 mb-2">Logout</button>
+                <a href="{{ route('logout') }}"  class="btn btn-dark w-24 mr-1 mb-2" onclick="return confirm('Anda yakin ingin keluar?')">Logout</a>
 </div>
             </div>
         </div>
@@ -95,6 +95,7 @@
         <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=["your-google-map-api"]&libraries=places"></script>
         <script src="{{ asset('assets/dist/js/app.js') }}"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <!-- END: JS Assets-->
 </body>
 </html>

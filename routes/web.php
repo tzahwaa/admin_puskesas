@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataBalitaController;
 use App\Http\Controllers\PuskesmasController;
@@ -28,7 +28,11 @@ Route::get('/', function () {
 Route::get('/confirm-email/{token}', [AuthController::class, 'confirm'])->name('confirm');
 
 // User Auth
-Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::get('/', [LoginController::class, 'index'])->name('login');
+Route::post('login', [LoginController::class, 'login'])->name('login.action');
+Route::get('password', [LoginController::class, 'password'])->name('password');
+Route::post('password', [LoginController::class, 'password_action'])->name('password.action');
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
 
@@ -90,3 +94,8 @@ Route::get('/admin/edit/{id}', [AdminController::class,'edit'])->name('admin.edi
 Route::post('/admin/update/{id}', [AdminController::class,'update'])->name('admin.update');
 
 Route::post('/admin/delete/{id}', [AdminController::class,'destroy'])->name('admin.destroy');
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

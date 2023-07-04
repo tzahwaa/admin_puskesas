@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
-
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -41,7 +42,7 @@ class AdminController extends Controller
         $value = new User;
         $value->name = $request->name;
         $value->email = $request->email;
-        $value->password = $request->password;
+        $value->password = Hash::make($request->password);
         $value->role = "admin";
         $value->save();
         
@@ -57,18 +58,22 @@ class AdminController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|unique:users,email',
+            'email' => [
+                'required',
+                Rule::unique('users')->ignore($id),
+            ],
             'password' => 'required',
         ], [
             'name.required' => 'Nama Tidak Boleh Kosong',
             'email.required' => 'Email Tidak Boleh Kosong',
             'password.required' => 'Password Tidak Boleh Kosong',
             'email.unique' => 'Email Tersebut Sudah Terdaftar',
+
         ]); 
-        $value = new User;
+        $value = User::find($id);
         $value->name = $request->name;
         $value->email = $request->email;
-        $value->password = $request->password;
+        $value->password = Hash::make($request->password);
         $value->role = "admin";
         $value->update();
 

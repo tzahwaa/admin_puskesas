@@ -15,7 +15,7 @@
         @csrf
             <div class="form-group">
                 <label>Nama</label>
-                <input type="text" name="name" value="{{ $value->name }}" class="form-control">
+                <input type="text" name="name" value="{{ $value->name }}" class="form-control" >
                 @error('name')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -23,13 +23,13 @@
             <div class="form-group mt-5">
                 <label>Email</label>
                 <input type="text" name="email" value="{{ $value->email }}" class="form-control">
-                 @error('email')
+                @error('email')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="form-group mt-5">
                 <label>Password</label>
-                <input type="text" name="password" value="{{ $value->password }}" class="form-control">
+                <input type="text" name="password" value="{{ $value->password}}" class="form-control">
                  @error('password')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror

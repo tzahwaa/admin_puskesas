@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Posyandu;
 use App\Models\Puskesmas;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
 class PosyanduController extends Controller
 {
     public function index(Request $request)
 {
-    {
+
     $puskesmasList = Puskesmas::all();
     $keyword = $request->keyword;
     $dataposyandu = Posyandu::where('nama_posyandu', 'LIKE', '%'.$keyword.'%')
@@ -22,13 +23,11 @@ class PosyanduController extends Controller
     }
     return view('dataposyandu.index', compact('puskesmasList','dataposyandu','keyword'));
 }
-}
+
 public function getPosyanduByPuskesmas(Request $request)
 {
     $puskesmasId = $request->input('puskesmas_id');
-
-    $posyanduList = Posyandu::where('puskesmas_id', $puskesmasId)->get();
-
+    $posyanduList = Posyandu::with('puskesmas')->where('puskesmas_id', $puskesmasId)->get();
     return response()->json($posyanduList);
 }
     
@@ -67,29 +66,33 @@ public function getPosyanduByPuskesmas(Request $request)
         return redirect('dataposyandu')->with('success', 'Data berhasil disimpan!');
     }
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
+        $puskesmas = Puskesmas::all();
         $value = Posyandu::find($id);
-        return view('dataposyandu.edit', compact('value'));
+        return view('dataposyandu.edit', compact('value','puskesmas'));
     }
     public function update(Request $request, $id)
     {
         $request->validate([
+            'nama_posyandu' => [
+                'required',
+                Rule::unique('posyandu')->ignore($id),
+            ],
             'alamat' => 'required',
             'kelurahan' => 'required',
             'kecamatan' => 'required',
             'puskesmas_id' => 'required',
         ], [
+            'nama_posyandu.required' => 'Nama Posyandu Tidak Boleh Kosong',
             'alamat.required' => 'Alamat Tidak Boleh Kosong',
             'kelurahan.required' => 'Nama Kelurahan Tidak Boleh Kosong',
             'kecamatan.required' => 'Nama Kecamatan Tidak Boleh Kosong',
             'puskesmas_id.required' => 'ID Puskesmas Tidak Boleh Kosong',
             'nama_posyandu.unique' => 'Posyandu Tersebut Sudah Terdaftar',
         ]); 
-
-
         $value = Posyandu::find($id);
-
+        $value->nama_posyandu = $request->nama_posyandu;
         $value->alamat = $request->alamat;
         $value->kelurahan = $request->kelurahan;
         $value->kecamatan = $request->kecamatan;

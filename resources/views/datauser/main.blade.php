@@ -28,7 +28,7 @@
                     </ol>
                 </nav>
                 <div class="intro-x relative mr-3 sm:mr-6">
-                <button class="btn btn-dark w-24 mr-1 mb-2">Logout</button>
+                <a href="{{ route('logout') }}"  class="btn btn-dark w-24 mr-1 mb-2" onclick="return confirm('Anda yakin ingin keluar?')">Logout</a>
 </div>
             </div>
         </div>

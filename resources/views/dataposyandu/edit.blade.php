@@ -15,7 +15,7 @@
         @csrf
             <div class="form-group">
                 <label>Nama Posyandu</label>
-                <input type="text" name="nama_posyandu" value="{{ $value->nama_posyandu }}" class="form-control" disabled>
+                <input type="text" name="nama_posyandu" value="{{ $value->nama_posyandu }}" class="form-control">
                 @error('nama_posyandu')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -29,7 +29,7 @@
             </div>
             <div class="form-group mt-5">
                 <label>Kelurahan</label>
-                <input type="number" name="kelurahan" value="{{ $value->kelurahan }}" class="form-control">
+                <input type="text" name="kelurahan" value="{{ $value->kelurahan }}" class="form-control">
                  @error('kelurahan')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -38,6 +38,18 @@
                 <label>Kecamatan</label>
                 <input type="text" name="kecamatan" value="{{ $value->kecamatan }}" class="form-control">
                 @error('kecamatan')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="form-group mt-5">
+                <label>Puskesmas</label>
+                <select name="puskesmas_id" class="form-select filter">
+                    <option value="">Pilih Puskesmas</option>
+                    @foreach ($puskesmas as $puskesma)
+                    <option value="{{ $puskesma->id }}">{{ $puskesma->nama_puskesmas }}</option>
+                    @endforeach
+                </select>
+                @error('puskesmas_id')
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>

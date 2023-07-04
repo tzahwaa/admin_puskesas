@@ -5,56 +5,33 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
-// class AuthApiController extends Controller
-// {
-//     public function index(){
-//         return view('login.index',[
-//             'title'=>'Login'
-//         ]);
-//     }
 
-//     public function forgot($token){
-//         return view('login.forgot');
-//     }
+class AuthController extends Controller
+{
+public function showLoginForm()
+{
+    return view('auth.login');
+}
 
-//     public function auth(Request $request){
-//         $email = $request->email;
-//         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-//             Log::create([
-//                 'user_id' => auth()->user()->id
-//             ]);
-//             return redirect('/');
-//         }
-//         else{
-//             return redirect('/login')->with('email', $email);
-//         }
-//     }
+public function login(Request $request)
+{
+    $credentials = $request->only('email', 'password');
+    
+    if (Auth::attempt($credentials)) {
+        // Login berhasil
+        return redirect()->intended('/dashboard');
+    } else {
+        // Login gagal
+        return redirect()->back()->withErrors(['message' => 'Login gagal. Silakan cek kembali email dan password Anda.']);
+    }
+}
 
-//     public function logout(){
-//         Auth::logout();
-//         return redirect('/login');
-//     }
-
-//     public function resetAction(Request $request, $token){
-//         $request->validate([
-//             'password' => 'required',
-//             'confirm_password' => 'required|same:password'
-//         ]);
-//         $reset = PasswordReset::where('token', $token)->first();
-//         User::where('email', $reset->email)->update([
-//             'password' => Hash::make($request->password)
-//         ]);
-//         Alert::success('Success','Password berhasil diperbarui!');
-//         return back();
-//     }
-
-//     public function confirm($token){
-//         User::where('remember_token', $token)->update([
-//             'email_verified_at' => Carbon::now()->toDateTimeString()
-//         ]);
-
-//         return view('login.success');
-//     }
-// }
-
+public function logout()
+{
+    Auth::logout();
+    return redirect('/');
+}
+}

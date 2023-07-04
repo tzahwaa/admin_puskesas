@@ -1,6 +1,6 @@
 @extends('databalita.main')
 
-@section('title', 'Databalita   ')
+<!-- @section('title', 'Databalita   ') -->
 
 @section('container')
 
@@ -78,17 +78,7 @@
                     </form>
                     <div class="flex mt-5 sm:mt-0">
                         <div class="dropdown w-1/2 sm:w-auto">
-                            <button class="dropdown-toggle btn btn-outline-secondary w-full sm:w-auto" aria-expanded="false" data-tw-toggle="dropdown"> <i data-lucide="file-text" class="w-4 h-4 mr-2"></i> Export <i data-lucide="chevron-down" class="w-4 h-4 ml-auto sm:ml-2"></i> </button>
-                            <div class="dropdown-menu w-40">
-                                <ul class="dropdown-content">
-                                    <li>
-                                        <a id="tabulator-export-csv" href="javascript:;" class="dropdown-item"> <i data-lucide="file-text" class="w-4 h-4 mr-2"></i> Export EXCEL </a>
-                                    </li>
-                                    <li>
-                                        <a id="tabulator-export-json" href="javascript:;" class="dropdown-item"> <i data-lucide="file-text" class="w-4 h-4 mr-2"></i> Export PDF </a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <button class="btn btn-warning w-50 mr-5 mb-2 mt-2" >Export Excel</button>
                         </div>
                     </div>
                 </div>
@@ -146,7 +136,7 @@
         <br/>
 <br/>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="{{url('filter.js')}}"></script>
+<!-- <script src="{{url('filter.js')}}"></script> -->
 {{-- balida --}}
 <script>
 $(document).ready(function() {
@@ -190,7 +180,7 @@ $(document).ready(function() {
                 success: function(response) {
                     // Tambahkan data Balita ke tabel
                     $.each(response, function(index, balita) {
-                        var newRow = '<tr>' +
+                        var newRow = '<tr class="table-dark text-center">' +
                             '<td>' + balita.id + '</td>' +
                             '<td>' + balita.nama_anak + '</td>' +
                             '<td>' + balita.nama_ibu + '</td>' +
