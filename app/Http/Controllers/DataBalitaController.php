@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Puskesmas;
 use App\Models\Posyandu;
 use App\Models\Balita;
+use App\Exports\BalitaExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DataBalitaController extends Controller
 {
@@ -53,5 +55,16 @@ class DataBalitaController extends Controller
         $posyanduList = Posyandu::where('puskesmas_id', $puskesmasId)->get();
 
         return response()->json($posyanduList);
+    }
+    public function exportExcel(Request $request)
+    {
+        $puskesmasId = $request->input('puskesmas_id');
+        $posyanduId = $request->input('posyandu_id');
+
+        $balitaList = Balita::where('puskesmas_id', $puskesmasId)
+            ->where('posyandu_id', $posyanduId)
+            ->get();
+
+            return Excel::download(new BalitaExport($balitaList), 'balita.xlsx');
     }
 }

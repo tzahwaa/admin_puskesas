@@ -42,6 +42,7 @@ Route::get('/getposyandu',[DataBalitaController::class, 'getPosyandu']);
 Route::get('/databalita/{puskesmasId}/getPosyandu', [PosyanduController::class, 'getPosyandu'])->name('posyandu.getPosyandu');
 Route::get('/databalita/getBalitaByPosyandu', [DataBalitaController::class, 'getBalitaByPosyandu'])->name('balita.getBalitaByPosyandu');
 Route::get('/databalita/getPosyanduByPuskesmas', [PosyanduController::class, 'getPosyanduByPuskesmas'])->name('posyandu.getPosyanduByPuskesmas');
+Route::get('/export-balita', [DataBalitaController::class, 'exportExcel'])->name('balita.export');
 
 Route::get('/datauser', [UserController::class,'index'])->name('datauser');
 

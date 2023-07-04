@@ -52,11 +52,11 @@
             @csrf
             <div class="mb-3">
                 <label>Email<span class="text-danger">*</span></label>
-                <input class="intro-x login__input form-control py-3 px-4 block" type="email" name="email" value="{{ old('email') }}" />
+                <input class="intro-x login__input form-control py-3 px-4 block" type="email" name="email" placeholder="masukkan email" />
             </div>
             <div class="mb-3">
                 <label>Password <span class="text-danger">*</span></label>
-                <input class="intro-x login__input form-control py-3 px-4 block" type="password" name="password" />
+                <input class="intro-x login__input form-control py-3 px-4 block" type="password" name="password" placeholder="masukkan password" />
             </div>
             <div class="mb-3">
                 <button class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">Login</button>

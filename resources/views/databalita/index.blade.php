@@ -78,7 +78,7 @@
                     </form>
                     <div class="flex mt-5 sm:mt-0">
                         <div class="dropdown w-1/2 sm:w-auto">
-                            <button class="btn btn-warning w-50 mr-5 mb-2 mt-2" >Export Excel</button>
+                        <a href="{{ route('balita.export') }}"  class="btn btn-warning w-50 mr-5 mb-2 mt-2" >Export Excel</a>
                         </div>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
             $pageNumber = ($databalita->currentPage() - 1) * $databalita->perPage() + $keys + 1;
             @endphp
             <tr class="table-dark text-center">
-                <td>{{ $value->id }}</td>
+                <td>{{ $pageNumber }}</td>
                 <td>{{ $value->nama_anak }}</td>
                 <td>{{ $value->nama_ibu}}</td>
                 <td>{{ $value->alamat }}</td>
