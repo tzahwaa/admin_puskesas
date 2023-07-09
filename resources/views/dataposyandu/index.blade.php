@@ -54,11 +54,22 @@
                         confirmationBox.style.display = 'none';
                     }
                     </script>
+                    
                         <form method="GET" action="{{ url('dataposyandu') }}">
                             <input id="tabulator-html-filter-value" type="text" class="form-control sm:w-56 2xl:w-full mt-2 sm:mt-0" name="keyword" placeholder="Cari posyandu ...">
                             <button class="btn btn-dark w-24 ml-4 mb-2 mt-2">Search</button>
                             </div>
+                             <div class="form-group">
+                <select name="puskesmas_id" id="puskesmasDropdown" class="mt-2 ml-8">
+                        <option value="">Pilih Puskesmas</option>
+                        @foreach($puskesmasList as $puskesmas)
+                            <option value="{{ $puskesmas->id }}">{{ $puskesmas->nama_puskesmas }}</option>
+                        @endforeach
+                    </select>
+                </div>
                     </form>
+                    
+                    
                     <div class="flex mt-5 sm:mt-0">
                     @if(session('success'))
                         <div class="confirmation-box">
@@ -68,14 +79,6 @@
                             </div>
                         </div>
                     @endif
-                    <div class="form-group">
-                <select name="puskesmas_id" id="puskesmasDropdown">
-                        <option value="">Pilih Puskesmas</option>
-                        @foreach($puskesmasList as $puskesmas)
-                            <option value="{{ $puskesmas->id }}">{{ $puskesmas->nama_puskesmas }}</option>
-                        @endforeach
-                    </select>
-            </div>
                     <!-- Add your CSS styles -->
                     <style>
                     .confirmation-box {
