@@ -41,18 +41,6 @@
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="form-group mt-5">
-                <label>Puskesmas</label>
-                <select name="puskesmas_id" class="form-select filter">
-                    <option value="">Pilih Puskesmas</option>
-                    @foreach ($puskesmas as $puskesma)
-                    <option value="{{ $puskesma->id }}">{{ $puskesma->nama_puskesmas }}</option>
-                    @endforeach
-                </select>
-                @error('puskesmas_id')
-                <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
             <div class="text-center mt-12">
 				<button class="btn btn-primary w-24 mr-3" style="margin-right: 6px;" type="submit">Simpan</button>
 				<a href="{{ route('dataposyandu') }}" class="btn btn-danger w-24 ml-3">Batal</a>

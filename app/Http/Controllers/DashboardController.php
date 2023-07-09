@@ -11,14 +11,17 @@ class DashboardController extends Controller
 {
     public function index() {
         $balita = Balita::count();
-        $stunting = DB::table('balita')->where('klasifikasi_panjang_badan', 'stunting')->count();
-        $tidakstunting = DB::table('balita')->where('klasifikasi_panjang_badan', 'normal')->count();
-        $gizibaik = DB::table('balita')->where('klasifikasi_berat_badan', 'gizi baik')->count();
-        $giziburuk = DB::table('balita')->where('klasifikasi_berat_badan', 'gizi buruk')->count();
-        $gizilebih = DB::table('balita')->where('klasifikasi_berat_badan', 'gizi lebih')->count();
-        $jantungnormal = DB::table('balita')->where('klasifikasi_detak_jantung', 'normal')->count();
-        $jantungtidaknormal = DB::table('balita')->where('klasifikasi_detak_jantung', 'tidak normal')->count();
-        return view('dashboard/index', compact('balita','stunting','tidakstunting','gizibaik','giziburuk','gizilebih','jantungnormal','jantungtidaknormal'));
+        $stunting = DB::table('balita')->where('klasifikasi_panjang_badan', 'Stunting')->count();
+        $tidakStuntingTinggi = DB::table('balita')->where('klasifikasi_panjang_badan', 'Tinggi')->count();
+        $tidakStuntingNormal = DB::table('balita')->where('klasifikasi_panjang_badan', 'Normal')->count();
+        $totalTidakStunting = $tidakStuntingNormal + $tidakStuntingTinggi;
+  
+        $beratkurang = DB::table('balita')->where('klasifikasi_berat_badan', 'Kurang')->count();
+        $beratlebih = DB::table('balita')->where('klasifikasi_berat_badan', 'Lebih')->count();
+        $beratnormal = DB::table('balita')->where('klasifikasi_berat_badan', 'Normal')->count();
+        // $jantungnormal = DB::table('balita')->where('klasifikasi_detak_jantung', 'normal')->count();
+        // $jantungtidaknormal = DB::table('balita')->where('klasifikasi_detak_jantung', 'tidak normal')->count();
+        return view('dashboard/index', compact('balita','stunting','totalTidakStunting','beratkurang','beratlebih','beratnormal'));
 
     }
     

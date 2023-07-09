@@ -68,9 +68,8 @@ public function getPosyanduByPuskesmas(Request $request)
 
     public function edit(Request $request, $id)
     {
-        $puskesmas = Puskesmas::all();
         $value = Posyandu::find($id);
-        return view('dataposyandu.edit', compact('value','puskesmas'));
+        return view('dataposyandu.edit', compact('value'));
     }
     public function update(Request $request, $id)
     {
@@ -82,13 +81,11 @@ public function getPosyanduByPuskesmas(Request $request)
             'alamat' => 'required',
             'kelurahan' => 'required',
             'kecamatan' => 'required',
-            'puskesmas_id' => 'required',
         ], [
             'nama_posyandu.required' => 'Nama Posyandu Tidak Boleh Kosong',
             'alamat.required' => 'Alamat Tidak Boleh Kosong',
             'kelurahan.required' => 'Nama Kelurahan Tidak Boleh Kosong',
             'kecamatan.required' => 'Nama Kecamatan Tidak Boleh Kosong',
-            'puskesmas_id.required' => 'ID Puskesmas Tidak Boleh Kosong',
             'nama_posyandu.unique' => 'Posyandu Tersebut Sudah Terdaftar',
         ]); 
         $value = Posyandu::find($id);
@@ -96,7 +93,6 @@ public function getPosyanduByPuskesmas(Request $request)
         $value->alamat = $request->alamat;
         $value->kelurahan = $request->kelurahan;
         $value->kecamatan = $request->kecamatan;
-        $value->puskesmas_id = $request->puskesmas_id;
         $value->update();
 
         return redirect('dataposyandu')->with('success', 'Data berhasil diupdate!');
@@ -107,6 +103,18 @@ public function getPosyanduByPuskesmas(Request $request)
         $value->delete();
         return redirect('dataposyandu')->with('success', 'Data berhasil dihapus!');
     }
+    public function delete(Request $request)
+{
+    $puskesmasId = $request->input('puskesmas_id');
+    $posyanduId = $request->input('posyandu_id');
+
+    // Hapus posyandu berdasarkan puskesmas ID dan posyandu ID
+    Posyandu::where('puskesmas_id', $puskesmasId)
+            ->where('id', $posyanduId)
+            ->delete();
+
+            return redirect('dataposyandu')->with('success', 'Data berhasil dihapus!');
+}
     /**
      * Display a listing of the resource.
      *

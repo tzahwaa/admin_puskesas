@@ -24,8 +24,6 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
-// Confirm Email
-Route::get('/confirm-email/{token}', [AuthController::class, 'confirm'])->name('confirm');
 
 // User Auth
 Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -33,6 +31,7 @@ Route::post('login', [LoginController::class, 'login'])->name('login.action');
 Route::get('password', [LoginController::class, 'password'])->name('password');
 Route::post('password', [LoginController::class, 'password_action'])->name('password.action');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+
 
 Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
 
@@ -42,7 +41,7 @@ Route::get('/getposyandu',[DataBalitaController::class, 'getPosyandu']);
 Route::get('/databalita/{puskesmasId}/getPosyandu', [PosyanduController::class, 'getPosyandu'])->name('posyandu.getPosyandu');
 Route::get('/databalita/getBalitaByPosyandu', [DataBalitaController::class, 'getBalitaByPosyandu'])->name('balita.getBalitaByPosyandu');
 Route::get('/databalita/getPosyanduByPuskesmas', [PosyanduController::class, 'getPosyanduByPuskesmas'])->name('posyandu.getPosyanduByPuskesmas');
-Route::get('/export-balita', [DataBalitaController::class, 'exportExcel'])->name('balita.export');
+Route::get('/export', [DataBalitaController::class, 'export'])->name('balita.export');
 
 Route::get('/datauser', [UserController::class,'index'])->name('datauser');
 
@@ -75,6 +74,8 @@ Route::get('/posyandu/edit/{id}', [PosyanduController::class,'edit'])->name('pos
 Route::post('/posyandu/update/{id}', [PosyanduController::class,'update'])->name('posyandu.update');
 
 Route::post('/posyandu/delete/{id}', [PosyanduController::class,'destroy'])->name('posyandu.destroy');
+
+Route::delete('/posyandu/delete', [PosyanduController::class, 'delete'])->name('posyandu.delete');
 
 Route::get('/posyandu/search', [PosyanduController::class,'search'])->name('posyandu.search');
 

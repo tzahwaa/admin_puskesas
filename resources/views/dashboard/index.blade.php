@@ -32,50 +32,35 @@
                                         <div class="report-box zoom-in">
                                             <div class="box p-5 ">
                                                 <div class="text-base text-slate-500 mt-1">Tidak Stunting</div>
-                                                <div class="text-3xl font-small leading-8 mt-6">{{ $tidakstunting }} </div>
+                                                <div class="text-3xl font-small leading-8 mt-6">{{ $totalTidakStunting }} </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y mt-4">
                                         <div class="report-box zoom-in">
                                             <div class="box p-5 ">
-                                                <div class="text-base text-slate-500 mt-1">Gizi Baik</div>
-                                                <div class="text-3xl font-small leading-8 mt-6">{{ $gizibaik }}</div>
+                                                <div class="text-base text-slate-500 mt-1">Berat Kurang</div>
+                                                <div class="text-3xl font-small leading-8 mt-6">{{ $beratkurang }}</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y mt-6">
                                         <div class="report-box zoom-in">
                                             <div class="box p-5 ">
-                                                <div class="text-base text-slate-500 mt-1">Gizi Buruk</div>
-                                                <div class="text-3xl font-small leading-8 mt-6">{{ $giziburuk }} </div>
+                                                <div class="text-base text-slate-500 mt-1">Berat Lebih</div>
+                                                <div class="text-3xl font-small leading-8 mt-6">{{ $beratlebih }} </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y mt-6">
                                         <div class="report-box zoom-in">
                                             <div class="box p-5 ">
-                                                <div class="text-base text-slate-500 mt-1">Gizi Lebih</div>
-                                                <div class="text-3xl font-small leading-8 mt-6">{{ $gizilebih }}</div>
+                                                <div class="text-base text-slate-500 mt-1">Berat Normal</div>
+                                                <div class="text-3xl font-small leading-8 mt-6">{{ $beratnormal }}</div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y mt-6">
-                                        <div class="report-box zoom-in">
-                                            <div class="box p-5 ">
-                                                <div class="text-base text-slate-500 mt-1">Jantung Normal</div>
-                                                <div class="text-3xl font-small leading-8 mt-6">{{ $jantungnormal }}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-span-12 sm:col-span-6 xl:col-span-3 intro-y mt-6">
-                                        <div class="report-box zoom-in">
-                                            <div class="box p-5">
-                                                <div class="text-base text-slate-500 mt-1 ">Jantung Tidak Normal</div>
-                                                <div class="text-3xl font-small leading-8 mt-6">{{ $jantungtidaknormal }}</div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                  
                                 </div>
                                 
                             </div>

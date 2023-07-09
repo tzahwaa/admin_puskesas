@@ -29,12 +29,17 @@ class LoginController extends Controller
         'email' => $request->email,
         'password' => $request->password
        ];
-
-       if(Auth::attempt($infologin)) {
-        return redirect('dashboard')->with('success', 'Berhasil login');
-       } else {
-        return redirect('/')->withErrors('Wrong username or password');
-       }
+       if (Auth::attempt($infologin)) {
+        // Authenticated as admin
+        if (auth()->user()->role == 'admin') {
+            return redirect('dashboard')->with('success', 'Berhasil login');
+        } else {
+            Auth::logout();
+            return redirect()->route('login')->withErrors('Hanya Admin Yang Boleh Login!');
+        }
+    } else {
+        return redirect()->route('login')->withErrors('username atau password salah!');
+    }
     }
 
     public function password()

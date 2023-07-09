@@ -25,6 +25,7 @@ class DataBalitaController extends Controller
     return view('databalita.index', compact('puskesmasList','databalita','keyword'));
 }
      public function getPosyandu(Request $request){
+        $posyanduId = $request->input('posyandu_id');
         $posyanduList = Posyandu::where("puskesmas_id", $request->id_puskesmas)->pluck('id','nama_posyandu');
 
         // dd($posyanduList);
@@ -66,5 +67,9 @@ class DataBalitaController extends Controller
             ->get();
 
             return Excel::download(new BalitaExport($balitaList), 'balita.xlsx');
+    }
+    public function export() 
+    {
+        return Excel::download(new BalitaExport, 'balita.xlsx');
     }
 }

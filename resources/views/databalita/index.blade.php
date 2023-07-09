@@ -102,6 +102,8 @@
                     <th>Klasifikasi Berat Badan</th>
                     <th>Klasifikasi Panjang Badan</th>
                     <th>Klasifikasi Detak Jantung</th>
+                    <th>Puskesmas</th>
+                    <th>Posyandu</th>
                 </tr>
          </thead>
          <tbody id="balitaTableBody">
@@ -126,6 +128,8 @@
                 <td>{{ $value->klasifikasi_berat_badan}}</td>
                 <td>{{ $value->klasifikasi_panjang_badan}}</td>
                 <td>{{ $value->klasifikasi_detak_jantung}}</td>
+                <td>{{ $value->puskesmas->nama_puskesmas }}</td>
+                <td>{{ $value->posyandu->nama_posyandu }}</td>
             </tr>
          @endforeach
     </tbody>
@@ -181,7 +185,7 @@ $(document).ready(function() {
                     // Tambahkan data Balita ke tabel
                     $.each(response, function(index, balita) {
                         var newRow = '<tr class="table-dark text-center">' +
-                            '<td>' + balita.id + '</td>' +
+                            '<td>' + (index + 1) + '</td>' +
                             '<td>' + balita.nama_anak + '</td>' +
                             '<td>' + balita.nama_ibu + '</td>' +
                             '<td>' + balita.alamat + '</td>' +
@@ -197,6 +201,8 @@ $(document).ready(function() {
                             '<td>' + balita.klasifikasi_berat_badan + '</td>' +
                             '<td>' + balita.klasifikasi_panjang_badan + '</td>' +
                             '<td>' + balita.klasifikasi_detak_jantung + '</td>' +
+                            '<td>' + balita.puskesmas.nama_puskesmas + '</td>' +
+                            '<td>' + balita.posyandu.nama_posyandu + '</td>' +
                             '</tr>';
                         $('#balitaTableBody').append(newRow);
                     });

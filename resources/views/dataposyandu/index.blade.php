@@ -170,7 +170,7 @@ $(document).ready(function() {
                         '<td>' + posyandu.kecamatan + '</td>' +
                         '<td>' + posyandu.puskesmas.nama_puskesmas + '</td>' +
                         '<td>' +  '<a href="/posyandu/edit/' + posyandu.id + '" class="btn btn-warning btn-sm">Edit</a>' + '</td>' +
-                        '<td>' + '<button onclick="deletePosyandu(' + posyandu.id + ')" class="btn btn-danger btn-sm">Hapus</button>' +'</td>' +
+                        '<td>' + '<button class="btn btn-danger btn-sm btn-delete-posyandu" data-puskesmas-id="' + selectedPuskesmasId + '" data-posyandu-id="' + posyandu.id + '" >Delete</button>' +'</td>' +
                         '</tr>';
                     posyanduTableBody.append(newRow);
                 });
@@ -179,19 +179,20 @@ $(document).ready(function() {
     });
     
 });
-    function deletePosyandu(id) {
+function deletePosyandu(puskesmasId, posyanduId) {
         if (confirm('Anda yakin ingin menghapus data ini?')) {
             $.ajax({
-                url: '/posyandu/delete/' + id,
-                type: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    _method: 'DELETE'
-                },
+        url: '{{ route("posyandu.delete") }}',
+        type: 'DELETE',
+        data: {
+            puskesmas_id: puskesmasId,
+            posyandu_id: posyanduId,
+            _token: '{{ csrf_token() }}',
+        },
                 success: function(response) {
                     // Tambahkan tindakan setelah data berhasil dihapus, seperti memuat ulang halaman atau mengupdate tampilan
                     console.log('Data berhasil dihapus');
-                    window.location = '{{ route('dataposyandu') }}';
+                    window.location.href = '{{ route('dataposyandu') }}';
                 },
                 error: function(xhr, status, error) {
                     // Tambahkan tindakan jika terjadi kesalahan saat menghapus data
@@ -200,6 +201,13 @@ $(document).ready(function() {
             });
         }
     }
+    // onclick button
+$(document).on('click', '.btn-delete-posyandu', function() {
+    var puskesmasId = $(this).data('puskesmas-id');
+    var posyanduId = $(this).data('posyandu-id');
+    deletePosyandu(puskesmasId, posyanduId);
+    window.location.href = '{{ route('dataposyandu') }}';
+});
 </script>
 
      </form>
