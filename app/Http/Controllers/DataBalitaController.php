@@ -25,7 +25,6 @@ class DataBalitaController extends Controller
     return view('databalita.index', compact('puskesmasList','databalita','keyword'));
 }
      public function getPosyandu(Request $request){
-        $posyanduId = $request->input('posyandu_id');
         $posyanduList = Posyandu::where("puskesmas_id", $request->id_puskesmas)->pluck('id','nama_posyandu');
 
         // dd($posyanduList);
@@ -43,7 +42,7 @@ class DataBalitaController extends Controller
         $puskesmasId = $request->input('puskesmas_id');
         $posyanduId = $request->input('posyandu_id');
 
-        $balitaList = Balita::where('puskesmas_id', $puskesmasId)
+        $balitaList = Balita::with('puskesmas', 'posyandu')->where('puskesmas_id', $puskesmasId)
             ->where('posyandu_id', $posyanduId)
             ->get();
 
