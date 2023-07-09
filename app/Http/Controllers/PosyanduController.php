@@ -120,7 +120,7 @@ public function getPosyanduByPuskesmas(Request $request)
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexApi($id_puskesmas)
+ public function indexApi($id_puskesmas)
     {
         //
         $posyandu = Posyandu::where('puskesmas_id', $id_puskesmas)->paginate(5);
@@ -146,9 +146,9 @@ public function getPosyanduByPuskesmas(Request $request)
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showApi($id)
+     public function showApi($id, $id_puskesmas)
     {
-        $posyandu = Posyandu::findOrFail($id);
+        $posyandu = Posyandu::where('puskesmas_id', $id_puskesmas)->findOrFail($id);
           return response()->json([
         'status' => 'success',
         'message' => 'Detail dari posyandu berhasil ditemukan.',

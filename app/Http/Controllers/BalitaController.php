@@ -26,7 +26,7 @@ class BalitaController extends Controller
     }
   
     // balita dengan id_puskesmas dan id_posyandu
-    public function indexApi($id_puskesmas, $id_posyandu)
+   public function indexApi($id_puskesmas, $id_posyandu)
     {
          // Dapatkan data balita berdasarkan ID puskesmas dan posyandu yang diberikan
         $balitas = Balita::where('puskesmas_id', $id_puskesmas)
@@ -50,7 +50,7 @@ class BalitaController extends Controller
         'prev_page_url' => $balitas->previousPageUrl()
     ]);
     }
-             public function showApi(Request $request, $id_puskesmas, $id_posyandu, $id_balita)
+          public function showApi(Request $request, $id_puskesmas, $id_posyandu, $id_balita)
     {
            // Cek apakah balita terkait dengan ID puskesmas dan posyandu yang diberikan
         $balita = Balita::where('puskesmas_id', $id_puskesmas)
@@ -131,7 +131,7 @@ class BalitaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateApi(Request $request, $id_puskesmas, $id_posyandu, $id_balita)
+  public function updateApi(Request $request, $id_puskesmas, $id_posyandu, $id_balita)
     {
         // Cek apakah balita terkait dengan ID puskesmas dan posyandu yang diberikan
         $balita = Balita::where('puskesmas_id', $id_puskesmas)
@@ -146,6 +146,7 @@ class BalitaController extends Controller
             'alamat' => 'sometimes|required',
             'jenis_kelamin' => 'sometimes|required',
             'umur' => 'sometimes|required|integer',
+            'tanggal_lahir' => 'sometimes|required|date',
             'berat_badan' => 'sometimes|required',
             'panjang_badan' => 'sometimes|required',
             'zscore_berat_badan' => 'sometimes|required',
@@ -176,7 +177,6 @@ class BalitaController extends Controller
      */
     public function destroyApi($id_puskesmas, $id_posyandu, $id_balita)
     {
-        // Cek apakah balita terkait dengan ID puskesmas dan posyandu yang diberikan
         $balita = Balita::where('puskesmas_id', $id_puskesmas)
             ->where('posyandu_id', $id_posyandu)
             ->findOrFail($id_balita);

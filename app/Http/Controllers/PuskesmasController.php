@@ -80,7 +80,13 @@ class PuskesmasController extends Controller
     
     
     }
-
+   public function showApiPuskespos()
+    {
+        //
+        $puskesmas = Puskesmas::with('posyandu')->get();
+        return response()->json($puskesmas);
+    
+    }
     // end api
      public function index(Request $request)
 {
