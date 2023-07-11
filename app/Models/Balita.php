@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Balita extends Model
 {
-    protected $table = 'balita';
+     protected $table = 'balita';
        protected $fillable = [
         'nama_anak',
         'nama_ibu',
         'alamat',
         'jenis_kelamin',
         'umur',
+        'tanggal_lahir',
         'berat_badan',
         'panjang_badan',
         'detak_jantung',

@@ -26,7 +26,7 @@ class BalitaController extends Controller
     }
   
     // balita dengan id_puskesmas dan id_posyandu
-   public function indexApi($id_puskesmas, $id_posyandu)
+    public function indexApi($id_puskesmas, $id_posyandu)
     {
          // Dapatkan data balita berdasarkan ID puskesmas dan posyandu yang diberikan
         $balitas = Balita::where('puskesmas_id', $id_puskesmas)
@@ -50,7 +50,7 @@ class BalitaController extends Controller
         'prev_page_url' => $balitas->previousPageUrl()
     ]);
     }
-          public function showApi(Request $request, $id_puskesmas, $id_posyandu, $id_balita)
+             public function showApi(Request $request, $id_puskesmas, $id_posyandu, $id_balita)
     {
            // Cek apakah balita terkait dengan ID puskesmas dan posyandu yang diberikan
         $balita = Balita::where('puskesmas_id', $id_puskesmas)
@@ -76,6 +76,7 @@ class BalitaController extends Controller
             'nama_ibu' => 'required',
             'alamat' => 'required',
             'umur' => 'required',
+            'tanggal_lahir' => 'required',
             'berat_badan' => 'required',
             'panjang_badan' => 'required',
             'detak_jantung' => 'required',
@@ -95,6 +96,7 @@ class BalitaController extends Controller
             'jenis_kelamin' => $validatedData['jenis_kelamin'],
             'nama_ibu' => $validatedData['nama_ibu'],
             'umur' => $validatedData['umur'],
+            'tanggal_lahir' => $validatedData['tanggal_lahir'],
             'alamat' => $validatedData['alamat'],
             'berat_badan' => $validatedData['berat_badan'],
             'panjang_badan' => $validatedData['panjang_badan'],
@@ -103,7 +105,7 @@ class BalitaController extends Controller
             'zscore_panjang_badan' => $validatedData['zscore_panjang_badan'],
             'klasifikasi_berat_badan' => $validatedData['klasifikasi_berat_badan'],
             'klasifikasi_panjang_badan' => $validatedData['klasifikasi_panjang_badan'],
-            'klasifikasi_detak_jantung' => $request->input('klasifikasi_detak_jantung', ""),
+            'klasifikasi_detak_jantung' => $request->input('klasifikasi_detak_jantung', "-"),
             'detak_jantung' => $request->input('detak_jantung', 0),
             'sistolik' => $request->input('sistolik', 0),
             'diastolik' => $request->input('diastolik', 0),
@@ -131,7 +133,7 @@ class BalitaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-  public function updateApi(Request $request, $id_puskesmas, $id_posyandu, $id_balita)
+    public function updateApi(Request $request, $id_puskesmas, $id_posyandu, $id_balita)
     {
         // Cek apakah balita terkait dengan ID puskesmas dan posyandu yang diberikan
         $balita = Balita::where('puskesmas_id', $id_puskesmas)
@@ -177,6 +179,7 @@ class BalitaController extends Controller
      */
     public function destroyApi($id_puskesmas, $id_posyandu, $id_balita)
     {
+        // Cek apakah balita terkait dengan ID puskesmas dan posyandu yang diberikan
         $balita = Balita::where('puskesmas_id', $id_puskesmas)
             ->where('posyandu_id', $id_posyandu)
             ->findOrFail($id_balita);
