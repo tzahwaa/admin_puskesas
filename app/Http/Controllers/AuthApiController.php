@@ -68,12 +68,18 @@ $validator = $validateData->valid();
             'email' => 'required|email',
             'password' => 'required',
         ]);
+        // revisi screen aplikasi
 
         if (Auth::attempt($credentials)) {
+            if(Auth::user()->role == 'user'){
             $user = Auth::user();
             $token = $user->createToken('API Token')->accessToken;
 
             return response()->json(['token' => $token,'user' => $user, 'message' => 'Succesfully login'], 200);
+            }
+           else{
+            return response()->json(['alert' => 'Hanya nakes yang dapat mengakses.'], Response::HTTP_NOT_FOUND);
+           }
         } else {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
