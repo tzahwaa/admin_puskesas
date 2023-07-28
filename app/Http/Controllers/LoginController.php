@@ -38,29 +38,9 @@ class LoginController extends Controller
             return redirect()->route('login')->withErrors('Hanya Admin Yang Boleh Login!');
         }
     } else {
-        return redirect()->route('login')->withErrors('username atau password salah!');
+        return redirect()->route('login')->withErrors('email atau password salah!');
     }
     }
-
-    public function password()
-    {
-        $data['title'] = 'Change Password';
-        return view('auth/password', $data);
-    }
-
-    public function password_action(Request $request)
-    {
-        $request->validate([
-            'old_password' => 'required|current_password',
-            'new_password' => 'required|confirmed',
-        ]);
-        $user = User::find(Auth::id());
-        $user->password = Hash::make($request->new_password);
-        $user->save();
-        $request->session()->regenerate();
-        return back()->with('success', 'Password changed!');
-    }
-
     public function logout(Request $request)
     {
         Auth::logout();
